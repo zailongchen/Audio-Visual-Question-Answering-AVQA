@@ -9,5 +9,6 @@ Learning to Answer Questions in Dynamic Audio-Visual Scenarios (Oral Presentatio
 /dataloader includes the dataloader for data prepocessing
 /data includes all required data and pretrained models to extract features
 ```
+Our implement is based on [MUSIC-AVQA](https://pages.github.com/) and [MIMN](https://github.com/xunan0812/MIMN). Thanks them for their contribution!
 ## Preliminary optimization results
 ![image](https://github.com/zailongchen/Audio-Visual-Question-Answering-AVQA/blob/main/image/results_1.png)
