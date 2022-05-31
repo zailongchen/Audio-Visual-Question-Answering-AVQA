@@ -7,8 +7,8 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from net_grd_avst.dataloader.dataloader_avst_mimn import *
-from net_grd_avst.models.net_avst_mimn_temp import AVQA_Fusion_Net
+from dataloader.dataloader_avst_mimn import *
+from models.net_avst_mimn_temp import AVQA_Fusion_Net
 import ast
 import json
 import numpy as np
