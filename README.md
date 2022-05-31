@@ -4,7 +4,7 @@ And we focus on optimize the accuracy of AVQA task, which aims to answer questio
 ## Dataset
 We use the dataset of MUSIC-AVQA Dataset, which is released in the CVPR 2022 paper:  
 Learning to Answer Questions in Dynamic Audio-Visual Scenarios (Oral Presentation).  
-The dataset can be downloaded at [MUSIC-AVQA](https://gewu-lab.github.io/MUSIC-AVQA/)
+The dataset can be downloaded at [MUSIC-AVQA](https://gewu-lab.github.io/MUSIC-AVQA/).
 ## Code
 ```
 /models includes the backbone and other supporting modules we use
