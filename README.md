@@ -13,4 +13,4 @@ The dataset can be downloaded at [MUSIC-AVQA](https://gewu-lab.github.io/MUSIC-A
 ```
 Our implement is based on [MUSIC-AVQA](https://pages.github.com/) and [MIMN](https://github.com/xunan0812/MIMN). Thanks them for their contribution!
 ## Preliminary optimization results
-![image](https://github.com/zailongchen/Audio-Visual-Question-Answering-AVQA/blob/main/image/results_1.png)
+![image](https://github.com/zailongchen/Audio-Visual-Question-Answering-AVQA/blob/main/result%20images/result_0.png)
