@@ -4,18 +4,18 @@ import os
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms, utils
 import pandas as pd
+import glob
 import json
 import ast
+import cv2
 from PIL import Image
 from munch import munchify
 import logging
-
 # from pytorch_pretrained import BertModel, BertTokenizer
-
 from transformers import BertModel, BertTokenizer
+from torchvision import transforms, utils
 
 PAD, CLS = '[PAD]', '[CLS]'  # padding符号, bert中综合信息符号
-
 
 def ids_to_multinomial(id, categories):
     """label encoding
@@ -27,20 +27,22 @@ def ids_to_multinomial(id, categories):
     return id_to_idx[id]
 
 
+
 class AVQA_dataset(Dataset):
     def __init__(
         self,
         label,
         audio_dir,
-        posi_video_res14x14_dir,
-        nega_video_res14x14_dir,
+        posi_video_dir,
+        nega_video_dir,
         transform=None,
         mode_flag='train',
+        num_frames = 60
     ):
 
         # 优化一些在get_item()中的操作，例如ToTensor, normalization，将这些操作在对数据进行初始化时就完成，而不是在每次取batch时再做
         samples = json.load(
-            open('/home/czl/MUSIC-AVQA-main/data/json/avqa-train.json', 'r')
+            open('/home/jovyan/Bert/data/json/avqa-train.json', 'r')
         )
         # nax =  nne
         ques_vocab = ['<pad>']
@@ -68,9 +70,10 @@ class AVQA_dataset(Dataset):
         self.word_to_ix = {word: i for i, word in enumerate(self.ques_vocab)}
 
         self.audio_dir = audio_dir
-        self.posi_video_res14x14_dir = posi_video_res14x14_dir
-        self.nega_video_res14x14_dir = nega_video_res14x14_dir
+        self.posi_video_dir = posi_video_dir
+        self.nega_video_dir = nega_video_dir
         self.transform = transform
+        self.num_frames = num_frames
 
         self.samples = json.load(open(label, 'r'))
         self.max_len = 14  # question length
@@ -78,7 +81,6 @@ class AVQA_dataset(Dataset):
         posi_video_list = []
         nega_video_list = []
         audio_list = []
-        nega_audio_list = []
         question_list = []
         answer_list = []
         for idx in range(len(self.samples)):
@@ -95,16 +97,6 @@ class AVQA_dataset(Dataset):
             # audio
             audio = np.load(os.path.join(self.audio_dir, video_name + '.npy'))[::6, :]
             audio_list.append(audio)
-            ## negative audio
-            # while 1:
-            #     neg_audio_idx = np.random.randint(0, len(self.samples))
-            #     if neg_audio_idx != idx:
-            #         break
-            # nega_audio_name = self.samples[neg_audio_idx]['video_id']
-            # nega_audio = np.load(
-            #     os.path.join(self.audio_dir, nega_audio_name + '.npy')
-            # )[::6, :]
-            # nega_audio_list.append(nega_audio)
 
             # question
             question = sample['question_content'].rstrip().split(' ')
@@ -130,9 +122,6 @@ class AVQA_dataset(Dataset):
         self.posi_video_list = posi_video_list
         self.nega_video_list = nega_video_list
         self.audio_list = torch.from_numpy(np.array(audio_list).astype(np.float32))
-        self.nega_audio_list = torch.from_numpy(
-            np.array(nega_audio_list).astype(np.float32)
-        )
         self.question_list = torch.from_numpy(np.array(question_list)).long()
         self.answer_list = torch.from_numpy(np.array(answer_list)).long()
 
@@ -142,23 +131,17 @@ class AVQA_dataset(Dataset):
     def __getitem__(self, idx):
         # positive video
         posi_name = self.posi_video_list[idx]
-        visual_posi = np.load(
-            os.path.join(self.posi_video_res14x14_dir, posi_name + '.npy')
-        )
+        
+        visual_posi = np.load(os.path.join(self.posi_video_dir, posi_name + '.npy'))
         visual_posi = torch.from_numpy(np.array(visual_posi))
 
         # # negative video
         nega_name = self.nega_video_list[idx]
-        visual_nega = np.load(
-            os.path.join(self.nega_video_res14x14_dir, nega_name + '.npy')
-        )
+        visual_nega = np.load(os.path.join(self.nega_video_dir, nega_name + '.npy'))
         visual_nega = torch.from_numpy(visual_nega)
 
         #  audio
         audio = self.audio_list[idx]
-
-        ## nega_audio
-        # nega_audio = self.nega_audio_list[idx]
 
         # question
         ques = self.question_list[idx]
@@ -167,7 +150,6 @@ class AVQA_dataset(Dataset):
         label = self.answer_list[idx]
         sample = {
             'audio_posi': audio,
-            # 'audio_nega': nega_audio,
             'visual_posi': visual_posi,
             'visual_nega': visual_nega,
             'question': ques,
@@ -195,3 +177,18 @@ class ToTensor(object):
             'question': sample['question'],
             'label': label,
         }
+
+def TransformImage(img):
+
+    transform_list = []
+    mean = [0.43216, 0.394666, 0.37645]
+    std = [0.22803, 0.22145, 0.216989]
+    
+    transform_list.append(transforms.ToPILImage())
+    transform_list.append(transforms.Resize([224,224]))
+    transform_list.append(transforms.ToTensor())
+    transform_list.append(transforms.Normalize(mean, std))
+    trans = transforms.Compose(transform_list)
+    frame_tensor = trans(img)
+    
+    return frame_tensor
