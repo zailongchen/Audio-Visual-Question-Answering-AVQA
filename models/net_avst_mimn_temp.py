@@ -2,9 +2,10 @@
 # file: ram.py
 # author: songyouwei <youwei0314@gmail.com>
 # Copyright (C) 2018. All Rights Reserved.
-
-from .layers.dynamic_rnn import DynamicLSTM
-from .layers.attention import Attention
+import sys
+sys.path.append('..')
+from layers.dynamic_rnn import DynamicLSTM
+from layers.attention import Attention
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -12,7 +13,7 @@ import torch.nn.functional as F
 # import torchvision.models as Models
 import numpy as np
 from einops import rearrange, repeat
-from .visual_net import resnet18
+from models.visual_net import resnet18
 import argparse
 
 
@@ -38,58 +39,72 @@ class FeedForward(nn.Module):
         x = x + residual
         x = self.layer_norm(x)
         return x
+    
+class self_att(nn.Module):
+    def __init__(self, hidden_dim):
+        super(self_att, self).__init__()
+        self.hidden_dim = hidden_dim
+        self.self_att = nn.MultiheadAttention(self.hidden_dim * 2, 4, dropout=0.1, batch_first=True)
+        # self.self_att = Attention(self.hidden_dim * 2, score_function='mlp')
+        self.norm = nn.LayerNorm(self.hidden_dim * 2)
+        self.dropout = nn.Dropout(0.1)
+    
+    def forward(self, q_k_v):
+        feat_att = self.self_att(
+            q_k_v,
+            q_k_v,
+            q_k_v,
+            attn_mask=None,
+            key_padding_mask=None,
+        )[0].squeeze(0)
+        feat_att = q_k_v + self.dropout(feat_att)
+        feat_att = self.norm(feat_att)
+        return feat_att
 
 
 # Co-attention between audio and video, question is treated as query
 class CoAttention(nn.Module):
-    def __init__(self, hops, hidden_dim, dropout=0.1):
+    def __init__(self, hops, hidden_dim, num_heads, dropout=0.1):
         super(CoAttention, self).__init__()
         self.hops = hops
         self.hidden_dim = hidden_dim
         self.embed_dim = 512
-        self.attention_audio = Attention(self.hidden_dim * 2, score_function='mlp')
-        self.attention_video = Attention(self.hidden_dim * 2, score_function='mlp')
-        self.attention_audio2video = Attention(
-            self.hidden_dim * 2, score_function='mlp'
-        )
-        self.attention_video2audio = Attention(
-            self.hidden_dim * 2, score_function='mlp'
-        )
+        self.attention_audio = Attention(self.hidden_dim * 2, n_head=num_heads, score_function='mlp', dropout=dropout)
+        self.attention_video = Attention(self.hidden_dim * 2, n_head=num_heads, score_function='mlp', dropout=dropout)
+        self.attention_audio2video = Attention(self.hidden_dim * 2, n_head=num_heads, score_function='mlp', dropout=dropout)
+        self.attention_video2audio = Attention(self.hidden_dim * 2, n_head=num_heads, score_function='mlp', dropout=dropout)
         self.FFN_audio = FeedForward(self.hidden_dim * 2, self.hidden_dim * 4)
         self.FFN_video = FeedForward(self.hidden_dim * 2, self.hidden_dim * 4)
+        
+        self.video_self_att = self_att(self.hidden_dim)
+        self.audio_self_att = self_att(self.hidden_dim)
+        self.question_self_att = self_att(self.hidden_dim)
 
-        self.gru_cell_video = nn.GRUCell(self.hidden_dim * 2, self.hidden_dim * 2)
-        self.gru_cell_audio = nn.GRUCell(self.hidden_dim * 2, self.hidden_dim * 2)
+        # self.gru_cell_video = nn.GRUCell(self.hidden_dim * 2, self.hidden_dim * 2)
+        # self.gru_cell_audio = nn.GRUCell(self.hidden_dim * 2, self.hidden_dim * 2)
 
     def forward(self, question_memory, audio_memory, video_memory):
+        question_memory = self.question_self_att(question_memory)
+        audio_memory = self.audio_self_att(audio_memory)
+        video_memory = self.audio_self_att(video_memory)
+        
         et_audio = question_memory
         et_video = question_memory
         for _ in range(self.hops):
-            it_al_audio2audio = self.attention_audio(audio_memory, et_audio).squeeze(
-                dim=1
-            )
+            it_al_audio2audio = self.attention_audio(audio_memory, et_audio).squeeze(dim=1)
             # audio branch
-            it_al_video2audio = self.attention_video2audio(
-                audio_memory, et_video
-            ).squeeze(dim=1)
+            it_al_video2audio = self.attention_video2audio(audio_memory, et_video).squeeze(dim=1)
             it_al_audio = (it_al_audio2audio + it_al_video2audio) / 2
             # video branch
-            it_al_video2video = self.attention_video(video_memory, et_video).squeeze(
-                dim=1
-            )
-            it_al_audio2video = self.attention_audio2video(
-                video_memory, et_audio
-            ).squeeze(dim=1)
+            it_al_video2video = self.attention_video(video_memory, et_video).squeeze(dim=1)
+            it_al_audio2video = self.attention_audio2video(video_memory, et_audio).squeeze(dim=1)
             it_al_video = (it_al_video2video + it_al_audio2video) / 2
-            # et_audio = self.gru_cell_audio(it_al_audio, et_audio)
-            # et_video = self.gru_cell_video(it_al_video, et_video)
 
             # combined_feature = rearrange(combined_feature, 'b t c -> b (t c)')
             et_audio = self.FFN_audio(it_al_audio, et_audio)
             et_video = self.FFN_video(it_al_video, et_video)
 
         return et_audio, et_video
-
 
 # Temporal attention, question is used as query, audio and video are k, v
 class temp_attention(nn.Module):
@@ -125,56 +140,39 @@ class temp_attention(nn.Module):
 class AVQA_Fusion_Net(nn.Module):
     def __init__(self, args):
         super(AVQA_Fusion_Net, self).__init__()
-        self.device = args.device
+        self.device = args.device 
         self.qst_vocab_size = 93
         self.word_embed_size = 512
         self.embed_dim_audio = 128
         self.embed_dim_video = 512  # or 2048
         self.hidden_dim = 256
         self.num_classes = 42  # size of answer vocab
-        self.hops = 3
+        self.hops = 2
+        self.num_heads = 4
         self.que_max_len = 14
-        # self.img_extractor = nn.Sequential(
-        #     *list(Models.resnet18(pretrained=True).children())[:-1]
-        # )
         # get the feature from [-2] layer of resnet18
         self.img_extractor = nn.Sequential(
             *list(resnet18(pretrained=True, modal="vision").children())[:-1]
         )
         self.word2vec = nn.Embedding(self.qst_vocab_size, self.word_embed_size)
-        self.bi_lstm_question = DynamicLSTM(
-            self.word_embed_size,
-            self.hidden_dim,
-            num_layers=1,
-            batch_first=True,
-            bidirectional=True,
-        )
-        self.bi_lstm_audio = DynamicLSTM(
-            self.embed_dim_audio,
-            self.hidden_dim,
-            num_layers=1,
-            batch_first=True,
-            bidirectional=True,
-        )
-        self.bi_lstm_video = DynamicLSTM(
-            self.embed_dim_video,
-            self.hidden_dim,
-            num_layers=1,
-            batch_first=True,
-            bidirectional=True,
-        )
+        self.bi_lstm_question = DynamicLSTM(self.word_embed_size,self.hidden_dim,num_layers=1,batch_first=True,bidirectional=True,)
+        self.bi_lstm_audio = DynamicLSTM(self.embed_dim_audio,self.hidden_dim,num_layers=1,batch_first=True,bidirectional=True,)
+        self.bi_lstm_video = DynamicLSTM(self.embed_dim_video,self.hidden_dim,num_layers=1,batch_first=True,bidirectional=True,)
 
-        self.avg_pooling = nn.AdaptiveAvgPool2d((1, 512))
-        self.co_attention = CoAttention(self.hops, self.hidden_dim)
+        # self.avg_pooling = nn.AdaptiveAvgPool2d((1, 512))
+        self.co_attention_stage1 = CoAttention(self.hops, self.hidden_dim, self.num_heads)
+        self.co_attention_stage2 = CoAttention(self.hops, self.hidden_dim, self.num_heads)
+        
+        # self.video_self_att = self_att(self.hidden_dim)
+        # self.audio_self_att = self_att(self.hidden_dim)
+        # self.question_self_att = self_att(self.hidden_dim)
 
-        self.question_audio_att = temp_attention(self.hidden_dim)
-        self.question_video_att = temp_attention(self.hidden_dim)
+        # self.question_audio_att = temp_attention(self.hidden_dim)
+        # self.question_video_att = temp_attention(self.hidden_dim)
 
         self.tanh = nn.Tanh()
         self.fc_fusion = nn.Linear(self.hidden_dim * 4, self.hidden_dim * 2)
-        self.fc_ans = nn.Linear(
-            self.hidden_dim * 2 * self.que_max_len, self.num_classes
-        )
+        self.fc_ans = nn.Linear(self.hidden_dim * 2 * self.que_max_len, self.num_classes)
 
     # (self, audio, visual_posi, visual_nega, question)
     def forward(self, audio_posi, video_posi, video_nega, question):
@@ -205,49 +203,30 @@ class AVQA_Fusion_Net(nn.Module):
 
         # question_memory [B, 14, 512], audio_memory [B, T, 512], video_*_memory [B, T, 512]
         question_memory, (_, _) = self.bi_lstm_question(question, question_memory_len)
-        audio_posi_memory, (_, _) = self.bi_lstm_audio(audio_posi, audio_memory_len)
-        # audio_nega_memory, (_, _) = self.bi_lstm_audio(audio_nega, audio_memory_len)
+        audio_memory, (_, _) = self.bi_lstm_audio(audio_posi, audio_memory_len)
         video_posi_memory, (_, _) = self.bi_lstm_video(video_posi, video_memory_len)
         video_nega_memory, (_, _) = self.bi_lstm_video(video_nega, video_memory_len)
         # print('question_memory: ', question_memory.shape)
+        
+        # video_posi_memory = self.video_self_att(video_posi_memory)
+        # audio_memory = self.audio_self_att(audio_memory)
+        # question_memory = self.question_self_att(question_memory)
+        
+        # stage_1 co-attention branch of positive audio and positive video
+        et_posi_audio, et_posi_video = self.co_attention_stage1(question_memory, audio_memory, video_posi_memory)
+        
+        # stage_1 co-attention branch of positive audio and negative video
+        _, et_nega_video = self.co_attention_stage1(question_memory, audio_memory, video_nega_memory)
 
-        # # AvgPool [B, 1, hidden_dim*2] [B, 1, 512]
-        # question_memory_pool = self.avg_pooling(question_memory)
-        # question_memory_pool = rearrange(question_memory_pool, 'b t c -> b (t c)')
-        question_memory_pool = question_memory  # [B, C] [2, 512]
-
-        # co-attention branch of positive audio and positive video
-        et_posi_audio, et_posi_video = self.co_attention(
-            question_memory_pool, audio_posi_memory, video_posi_memory
-        )
-
-        # co-attention branch of positive audio and negative video
-        _, et_nega_video = self.co_attention(
-            question_memory_pool, audio_posi_memory, video_nega_memory
-        )
-
-        # co-attention branch of nega audio and positive video
-        # et_nega_audio, _ = self.co_attention(
-        #     question_memory_pool, audio_nega_memory, video_posi_memory
-        # )
-
-        ### attention, question as query on et_posi_video
-        visual_posi_feat_att = self.question_video_att(question_memory, et_posi_video)
-
-        ### attention, question as query on et_posi_audio
-        audio_feat_att = self.question_video_att(question_memory, et_posi_audio)
+        # stage_2 co-attention branch of stage_1's output
+        audio_feat_att, visual_posi_feat_att = self.co_attention_stage2(question_memory, et_posi_audio, et_posi_video)
 
         # fusion between fused video and fused audio
-        feat = torch.cat(
-            (audio_feat_att, visual_posi_feat_att),
-            dim=-1,
-        )
+        feat = torch.cat((audio_feat_att, visual_posi_feat_att),dim=-1,)
         feat = self.tanh(feat)
         feat = self.fc_fusion(feat)
 
-        ## fusion with question
-        combined_feature = torch.mul(feat, question_memory)
-        combined_feature = self.tanh(combined_feature)
+        combined_feature = self.tanh(feat)
         combined_feature = rearrange(combined_feature, 'b t c -> b (t c)')
         out = self.fc_ans(combined_feature)  # [batch_size, ans_vocab_size]
 
@@ -276,9 +255,7 @@ if __name__ == "__main__":
     audio_memory_len = torch.from_numpy(np.array([T for i in range(B)]))
     video_memory_len = torch.from_numpy(np.array([T for i in range(B)]))
     nonzeros_question = torch.from_numpy(np.array(question_memory_len))
-    out_qa, et_posi_audio, et_posi_video, et_nega_video = model(
-        audio, video_posi, video_nega, question
-    )
+    out_qa, et_posi_audio, et_posi_video, et_nega_video = model(audio, video_posi, video_nega, question)
     print('\nout_qa feature dimension ----- ', out_qa.size())
     print('audio_posi_feat feature dimension ----- ', et_posi_audio.size())
     print('audio_nega_feat feature dimension ----- ', et_posi_audio.size())
