@@ -6,7 +6,7 @@ We use the dataset of MUSIC-AVQA Dataset, which is released in the CVPR 2022 pap
 Learning to Answer Questions in Dynamic Audio-Visual Scenarios (Oral Presentation).  
 The dataset can be downloaded at [MUSIC-AVQA](https://gewu-lab.github.io/MUSIC-AVQA/).
 ## Preparation of the pretrained models
-The resnet-18 and vggish networks can be downloaded at [Res-18](https://pan.baidu.com/s/1v4DAdjp0o2atNiKknh2H4w?pwd=2g8i 提取码: 2g8i), [VGGish model](https://pan.baidu.com/s/1VUyfTGPvlv_sJzLPw5Kc2g?pwd=r4of 提取码: r4of), and [VGGish params](https://pan.baidu.com/s/1eoE8AhEsch_-_RUfhfZwAQ?pwd=r3hf 提取码: r3hf).
+The resnet-18 and vggish networks can be downloaded at [Res-18](https://pan.baidu.com/s/1v4DAdjp0o2atNiKknh2H4w?pwd=2g8i 提取码: 2g8i), [VGGish model](https://pan.baidu.com/s/1VUyfTGPvlv_sJzLPw5Kc2g?pwd=r4of 提取码: r4of), and [VGGish params](https://pan.baidu.com/s/1eoE8AhEsch_-_RUfhfZwAQ?pwd=r3hf 提取码: r3hf). These models should be placed at /data/pretrained_model folder.
 ## Code
 ```
 /models includes the backbone and other supporting modules we use
