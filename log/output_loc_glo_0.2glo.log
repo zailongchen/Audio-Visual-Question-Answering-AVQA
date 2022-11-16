@@ -1,0 +1,316 @@
+nohup: ignoring input
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/distributed/launch.py:178: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+INFO:root:********************************************************
+INFO:root:****************** Experiment setting ******************
+INFO:root:label_train dir --------- ./data/json_update/avqa-train.json
+INFO:root:label_val dir ----------- ./data/json_update/avqa-val.json
+INFO:root:label_test dir ---------- ./data/json_update/avqa-test.json
+INFO:root:audio dir --------------- ./data/feats/vggish
+INFO:root:posi_video dir ---------- /data/avst/r2plus1d_18/
+INFO:root:nega_video dir ---------- /data/avst/r2plus1d_18/
+INFO:root:batch size -------------- 32
+INFO:root:num of epoches ---------- 15
+INFO:root:learning rate ----------- 0.0001
+INFO:root:name of model ----------- AVQA_Fusion_Net
+INFO:root:train or test ----------- train
+INFO:root:model save dir ---------- ./data/checkpoints/checkpoint_0.2glo
+INFO:root:num of dataloader workers 2
+INFO:root:gpu id ------------------ 0,1,2,3
+INFO:root:********************************************************
+INFO:torch.distributed.distributed_c10d:Added key: store_based_barrier_key:1 to store for rank: 0
+INFO:torch.distributed.distributed_c10d:Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+INFO:root:------------ Audio-Visual Spatial-Temporal Model ------------ 
+
+INFO:root:-------------- training dataset preparation --------------
+
+INFO:root:--------- training dataset preparation completed ----------
+
+INFO:root:length of training dataset ----------- 250
+
+INFO:root:-------------- validation dataset preparation --------------
+
+INFO:root:-------- validation dataset preparation completed ----------
+INFO:root:length of validation dataset ----------- 143
+INFO:root:-------------- start training --------------
+
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+[W reducer.cpp:1251] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[W reducer.cpp:1251] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[W reducer.cpp:1251] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[W reducer.cpp:1251] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+INFO:root:Train Epoch: 1 [0/31927 ]	Loss: 4.8567399978637695
+INFO:root:Train Epoch: 1 [3200/31927 ]	Loss: 1.5681908130645752
+INFO:root:Train Epoch: 1 [6400/31927 ]	Loss: 1.4145376682281494
+INFO:root:Accuracy qa: 61.82136602451839
+INFO:root:Train Epoch: 2 [0/31927 ]	Loss: 1.2354347705841064
+INFO:root:Train Epoch: 2 [3200/31927 ]	Loss: 1.3861421346664429
+INFO:root:Train Epoch: 2 [6400/31927 ]	Loss: 1.3138060569763184
+INFO:root:Accuracy qa: 65.7399299474606
+INFO:root:Train Epoch: 3 [0/31927 ]	Loss: 1.1540145874023438
+INFO:root:Train Epoch: 3 [3200/31927 ]	Loss: 1.1446919441223145
+INFO:root:Train Epoch: 3 [6400/31927 ]	Loss: 1.1623777151107788
+INFO:root:Accuracy qa: 67.71015761821366
+INFO:root:Train Epoch: 4 [0/31927 ]	Loss: 1.0219793319702148
+INFO:root:Train Epoch: 4 [3200/31927 ]	Loss: 1.0030267238616943
+INFO:root:Train Epoch: 4 [6400/31927 ]	Loss: 0.9123376607894897
+INFO:root:Accuracy qa: 68.56392294220666
+INFO:root:Train Epoch: 5 [0/31927 ]	Loss: 0.8316242694854736
+INFO:root:Train Epoch: 5 [3200/31927 ]	Loss: 0.8051124215126038
+INFO:root:Train Epoch: 5 [6400/31927 ]	Loss: 0.8034183382987976
+INFO:root:Accuracy qa: 71.01576182136603
+INFO:root:Train Epoch: 6 [0/31927 ]	Loss: 0.9083631038665771
+INFO:root:Train Epoch: 6 [3200/31927 ]	Loss: 0.8001199960708618
+INFO:root:Train Epoch: 6 [6400/31927 ]	Loss: 0.7982433438301086
+INFO:root:Accuracy qa: 71.3660245183888
+INFO:root:Train Epoch: 7 [0/31927 ]	Loss: 0.7573363780975342
+INFO:root:Train Epoch: 7 [3200/31927 ]	Loss: 0.7027381658554077
+INFO:root:Train Epoch: 7 [6400/31927 ]	Loss: 0.6311737298965454
+INFO:root:Accuracy qa: 69.72416812609457
+INFO:root:Train Epoch: 8 [0/31927 ]	Loss: 0.6133259534835815
+INFO:root:Train Epoch: 8 [3200/31927 ]	Loss: 0.44723638892173767
+INFO:root:Train Epoch: 8 [6400/31927 ]	Loss: 0.532712459564209
+INFO:root:Accuracy qa: 71.49737302977233
+INFO:root:Train Epoch: 9 [0/31927 ]	Loss: 0.5522985458374023
+INFO:root:Train Epoch: 9 [3200/31927 ]	Loss: 0.32862037420272827
+INFO:root:Train Epoch: 9 [6400/31927 ]	Loss: 0.3846724033355713
+INFO:root:Accuracy qa: 74.25569176882662
+INFO:root:Train Epoch: 10 [0/31927 ]	Loss: 0.27661460638046265
+INFO:root:Train Epoch: 10 [3200/31927 ]	Loss: 0.2790148854255676
+INFO:root:Train Epoch: 10 [6400/31927 ]	Loss: 0.2751622498035431
+INFO:root:Accuracy qa: 73.68651488616463
+INFO:root:Train Epoch: 11 [0/31927 ]	Loss: 0.28164881467819214
+INFO:root:Train Epoch: 11 [3200/31927 ]	Loss: 0.23297865688800812
+INFO:root:Train Epoch: 11 [6400/31927 ]	Loss: 0.24934495985507965
+INFO:root:Accuracy qa: 74.19001751313485
+INFO:root:Train Epoch: 12 [0/31927 ]	Loss: 0.1955530196428299
+INFO:root:Train Epoch: 12 [3200/31927 ]	Loss: 0.21852350234985352
+INFO:root:Train Epoch: 12 [6400/31927 ]	Loss: 0.18165656924247742
+INFO:root:Accuracy qa: 73.3800350262697
+INFO:root:Train Epoch: 13 [0/31927 ]	Loss: 0.15947072207927704
+INFO:root:Train Epoch: 13 [3200/31927 ]	Loss: 0.16635537147521973
+INFO:root:Train Epoch: 13 [6400/31927 ]	Loss: 0.2130376100540161
+INFO:root:Accuracy qa: 73.59894921190893
+INFO:root:Train Epoch: 14 [0/31927 ]	Loss: 0.1695059835910797
+INFO:root:Train Epoch: 14 [3200/31927 ]	Loss: 0.18148960173130035
+INFO:root:Train Epoch: 14 [6400/31927 ]	Loss: 0.13970118761062622
+INFO:root:Accuracy qa: 73.97110332749563
+INFO:root:Train Epoch: 15 [0/31927 ]	Loss: 0.14584648609161377
+INFO:root:Train Epoch: 15 [3200/31927 ]	Loss: 0.14499346911907196
+INFO:root:Train Epoch: 15 [6400/31927 ]	Loss: 0.14198046922683716
+INFO:root:Accuracy qa: 73.92732049036778
+INFO:root:-------------- end of training --------------
+
+Traceback (most recent call last):
+  File "/home/jovyan/Bert/main_avst_loc_glo.py", line 360, in <module>
+    main(args)
+  File "/home/jovyan/Bert/main_avst_loc_glo.py", line 314, in main
+    checkpoint = torch.load(os.path.join(args.model_save_dir, args.checkpoint, 'best' '.tar'))
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 712, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 1049, in _load
+    result = unpickler.load()
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 1019, in persistent_load
+    load_tensor(dtype, nbytes, key, _maybe_decode_ascii(location))
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 1001, in load_tensor
+    wrap_storage=restore_location(storage, location),
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/_utils.py", line 78, in _cuda
+    return torch._UntypedStorage(self.size(), device=torch.device('cuda')).copy_(self, non_blocking)
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Traceback (most recent call last):
+  File "/home/jovyan/Bert/main_avst_loc_glo.py", line 360, in <module>
+    main(args)
+  File "/home/jovyan/Bert/main_avst_loc_glo.py", line 314, in main
+    checkpoint = torch.load(os.path.join(args.model_save_dir, args.checkpoint, 'best' '.tar'))
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 712, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 1049, in _load
+    result = unpickler.load()
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 1019, in persistent_load
+    load_tensor(dtype, nbytes, key, _maybe_decode_ascii(location))
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 1001, in load_tensor
+    wrap_storage=restore_location(storage, location),
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/_utils.py", line 78, in _cuda
+    return torch._UntypedStorage(self.size(), device=torch.device('cuda')).copy_(self, non_blocking)
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Traceback (most recent call last):
+  File "/home/jovyan/Bert/main_avst_loc_glo.py", line 360, in <module>
+    main(args)
+  File "/home/jovyan/Bert/main_avst_loc_glo.py", line 314, in main
+    checkpoint = torch.load(os.path.join(args.model_save_dir, args.checkpoint, 'best' '.tar'))
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 712, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 1049, in _load
+    result = unpickler.load()
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 1019, in persistent_load
+    load_tensor(dtype, nbytes, key, _maybe_decode_ascii(location))
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 1001, in load_tensor
+    wrap_storage=restore_location(storage, location),
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/_utils.py", line 78, in _cuda
+    return torch._UntypedStorage(self.size(), device=torch.device('cuda')).copy_(self, non_blocking)
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+INFO:root:length of test dataset ----------- 9129
+INFO:root:-------------- loading checkpoint ----------------
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 887 closing signal SIGTERM
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 1 (pid: 888) of binary: /home/jovyan/conda-envs/czl/bin/python
+Traceback (most recent call last):
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/distributed/launch.py", line 193, in <module>
+    main()
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/distributed/launch.py", line 189, in main
+    launch(args)
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/distributed/launch.py", line 174, in launch
+    run(args)
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/distributed/run.py", line 752, in run
+    elastic_launch(
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 131, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 245, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+main_avst_loc_glo.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2022-11-11_05:52:27
+  host      : jupyter-chenzailong
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 889)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2022-11-11_05:52:27
+  host      : jupyter-chenzailong
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 890)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2022-11-11_05:52:27
+  host      : jupyter-chenzailong
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 888)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+nohup: ignoring input
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/distributed/launch.py:178: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+INFO:root:********************************************************
+INFO:root:****************** Experiment setting ******************
+INFO:root:label_train dir --------- ./data/json_update/avqa-train.json
+INFO:root:label_val dir ----------- ./data/json_update/avqa-val.json
+INFO:root:label_test dir ---------- ./data/json_update/avqa-test.json
+INFO:root:audio dir --------------- ./data/feats/vggish
+INFO:root:posi_video dir ---------- /data/avst/r2plus1d_18/
+INFO:root:nega_video dir ---------- /data/avst/r2plus1d_18/
+INFO:root:batch size -------------- 32
+INFO:root:num of epoches ---------- 15
+INFO:root:learning rate ----------- 0.0001
+INFO:root:name of model ----------- AVQA_Fusion_Net
+INFO:root:train or test ----------- test
+INFO:root:model save dir ---------- ./data/checkpoints/checkpoint_0.2glo
+INFO:root:num of dataloader workers 2
+INFO:root:gpu id ------------------ 0,1,2,3
+INFO:root:********************************************************
+INFO:torch.distributed.distributed_c10d:Added key: store_based_barrier_key:1 to store for rank: 0
+INFO:torch.distributed.distributed_c10d:Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+INFO:root:------------ Audio-Visual Spatial-Temporal Model ------------ 
+
+INFO:root:length of test dataset ----------- 9129
+INFO:root:-------------- loading checkpoint ----------------
+INFO:root:-------- checkpoint loading successfully ----------
+INFO:root:********************************************************
+INFO:root:the best epoch ---------- 9
+INFO:root:the best train acc ------ 74.25569176882662
+INFO:root:********************************************************
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+INFO:root:Audio Counting Accuracy: 82.40 %
+INFO:root:Audio Cmp Accuracy: 69.70 %
+INFO:root:Audio Accuracy: 77.72 %
+INFO:root:Visual Counting Accuracy: 79.03 %
+INFO:root:Visual Loc Accuracy: 77.22 %
+INFO:root:Visual Accuracy: 78.12 %
+INFO:root:AV Ext Accuracy: 81.98 %
+INFO:root:AV counting Accuracy: 74.31 %
+INFO:root:AV Loc Accuracy: 64.35 %
+INFO:root:AV Cmp Accuracy: 64.21 %
+INFO:root:AV Temporal Accuracy: 63.75 %
+INFO:root:AV Accuracy: 70.11 %
+INFO:root:Overall Accuracy: 73.58 %

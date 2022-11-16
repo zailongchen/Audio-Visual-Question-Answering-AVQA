@@ -1,0 +1,185 @@
+nohup: ignoring input
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/distributed/launch.py:178: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+INFO:root:********************************************************
+INFO:root:****************** Experiment setting ******************
+INFO:root:label_train dir --------- ./data/json_update/avqa-train.json
+INFO:root:label_val dir ----------- ./data/json_update/avqa-val.json
+INFO:root:label_test dir ---------- ./data/json_update/avqa-test.json
+INFO:root:audio dir --------------- ./data/feats/vggish
+INFO:root:posi_video dir ---------- /data/avst/r2plus1d_18/
+INFO:root:nega_video dir ---------- /data/avst/r2plus1d_18/
+INFO:root:batch size -------------- 32
+INFO:root:num of epoches ---------- 15
+INFO:root:learning rate ----------- 0.0001
+INFO:root:name of model ----------- AVQA_Fusion_Net
+INFO:root:train or test ----------- train
+INFO:root:model save dir ---------- ./data/checkpoints/checkpoint_0.3glo
+INFO:root:num of dataloader workers 2
+INFO:root:gpu id ------------------ 0,1,2,3
+INFO:root:********************************************************
+INFO:torch.distributed.distributed_c10d:Added key: store_based_barrier_key:1 to store for rank: 0
+INFO:torch.distributed.distributed_c10d:Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+INFO:root:------------ Audio-Visual Spatial-Temporal Model ------------ 
+
+INFO:root:-------------- training dataset preparation --------------
+
+INFO:root:--------- training dataset preparation completed ----------
+
+INFO:root:length of training dataset ----------- 250
+
+INFO:root:-------------- validation dataset preparation --------------
+
+INFO:root:-------- validation dataset preparation completed ----------
+INFO:root:length of validation dataset ----------- 143
+INFO:root:-------------- start training --------------
+
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+[W reducer.cpp:1251] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[W reducer.cpp:1251] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[W reducer.cpp:1251] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[W reducer.cpp:1251] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+INFO:root:Train Epoch: 1 [0/31927 ]	Loss: 5.207413673400879
+INFO:root:Train Epoch: 1 [3200/31927 ]	Loss: 1.80716073513031
+INFO:root:Train Epoch: 1 [6400/31927 ]	Loss: 1.6247272491455078
+INFO:root:Accuracy qa: 62.324868651488615
+INFO:root:Train Epoch: 2 [0/31927 ]	Loss: 1.4047003984451294
+INFO:root:Train Epoch: 2 [3200/31927 ]	Loss: 1.572534203529358
+INFO:root:Train Epoch: 2 [6400/31927 ]	Loss: 1.4522783756256104
+INFO:root:Accuracy qa: 65.56479859894921
+INFO:root:Train Epoch: 3 [0/31927 ]	Loss: 1.313907504081726
+INFO:root:Train Epoch: 3 [3200/31927 ]	Loss: 1.2549062967300415
+INFO:root:Train Epoch: 3 [6400/31927 ]	Loss: 1.2027661800384521
+INFO:root:Accuracy qa: 67.11908931698774
+INFO:root:Train Epoch: 4 [0/31927 ]	Loss: 0.9838923811912537
+INFO:root:Train Epoch: 4 [3200/31927 ]	Loss: 0.9652239084243774
+INFO:root:Train Epoch: 4 [6400/31927 ]	Loss: 0.860167920589447
+INFO:root:Accuracy qa: 69.50525394045535
+INFO:root:Train Epoch: 5 [0/31927 ]	Loss: 0.7411386370658875
+INFO:root:Train Epoch: 5 [3200/31927 ]	Loss: 0.7645694017410278
+INFO:root:Train Epoch: 5 [6400/31927 ]	Loss: 0.7521355748176575
+INFO:root:Accuracy qa: 70.03064798598949
+INFO:root:Train Epoch: 6 [0/31927 ]	Loss: 0.8918004035949707
+INFO:root:Train Epoch: 6 [3200/31927 ]	Loss: 0.6826855540275574
+INFO:root:Train Epoch: 6 [6400/31927 ]	Loss: 0.6816123723983765
+INFO:root:Accuracy qa: 71.12521891418564
+INFO:root:Train Epoch: 7 [0/31927 ]	Loss: 0.7494364380836487
+INFO:root:Train Epoch: 7 [3200/31927 ]	Loss: 0.6479184031486511
+INFO:root:Train Epoch: 7 [6400/31927 ]	Loss: 0.5562829971313477
+INFO:root:Accuracy qa: 68.65148861646234
+INFO:root:Train Epoch: 8 [0/31927 ]	Loss: 0.5240856409072876
+INFO:root:Train Epoch: 8 [3200/31927 ]	Loss: 0.5302078723907471
+INFO:root:Train Epoch: 8 [6400/31927 ]	Loss: 0.47921285033226013
+INFO:root:Accuracy qa: 72.00087565674255
+INFO:root:Train Epoch: 9 [0/31927 ]	Loss: 0.5483766198158264
+INFO:root:Train Epoch: 9 [3200/31927 ]	Loss: 0.2997964024543762
+INFO:root:Train Epoch: 9 [6400/31927 ]	Loss: 0.38974881172180176
+INFO:root:Accuracy qa: 73.90542907180385
+INFO:root:Train Epoch: 10 [0/31927 ]	Loss: 0.25398415327072144
+INFO:root:Train Epoch: 10 [3200/31927 ]	Loss: 0.24838098883628845
+INFO:root:Train Epoch: 10 [6400/31927 ]	Loss: 0.24180296063423157
+INFO:root:Accuracy qa: 74.03677758318739
+INFO:root:Train Epoch: 11 [0/31927 ]	Loss: 0.26625746488571167
+INFO:root:Train Epoch: 11 [3200/31927 ]	Loss: 0.18692491948604584
+INFO:root:Train Epoch: 11 [6400/31927 ]	Loss: 0.22097691893577576
+INFO:root:Accuracy qa: 73.59894921190893
+INFO:root:Train Epoch: 12 [0/31927 ]	Loss: 0.17066499590873718
+INFO:root:Train Epoch: 12 [3200/31927 ]	Loss: 0.21877235174179077
+INFO:root:Train Epoch: 12 [6400/31927 ]	Loss: 0.2019284963607788
+INFO:root:Accuracy qa: 73.9492119089317
+INFO:root:Train Epoch: 13 [0/31927 ]	Loss: 0.15916696190834045
+INFO:root:Train Epoch: 13 [3200/31927 ]	Loss: 0.14773871004581451
+INFO:root:Train Epoch: 13 [6400/31927 ]	Loss: 0.22217166423797607
+INFO:root:Accuracy qa: 73.75218914185639
+INFO:root:Train Epoch: 14 [0/31927 ]	Loss: 0.16669708490371704
+INFO:root:Train Epoch: 14 [3200/31927 ]	Loss: 0.16936102509498596
+INFO:root:Train Epoch: 14 [6400/31927 ]	Loss: 0.12924638390541077
+INFO:root:Accuracy qa: 73.55516637478108
+INFO:root:Train Epoch: 15 [0/31927 ]	Loss: 0.12508326768875122
+INFO:root:Train Epoch: 15 [3200/31927 ]	Loss: 0.17424651980400085
+INFO:root:Train Epoch: 15 [6400/31927 ]	Loss: 0.11526328325271606
+INFO:root:Accuracy qa: 73.577057793345
+INFO:root:-------------- end of training --------------
+
+INFO:root:length of test dataset ----------- 9129
+INFO:root:-------------- loading checkpoint ----------------
+INFO:root:-------- checkpoint loading successfully ----------
+INFO:root:********************************************************
+INFO:root:the best epoch ---------- 10
+INFO:root:the best train acc ------ 74.03677758318739
+INFO:root:********************************************************
+Audio Counting num: 846
+Audio Cmp num: 421
+Visual Counting num: 954
+Visual Loc num: 944
+AV Ext num: 817
+AV counting num: 931
+AV Loc num: 581
+AV Cmp num: 717
+AV Temporal num: 532
+Audio Counting num: 846
+Audio Cmp num: 421
+Visual Counting num: 954
+Visual Loc num: 944
+AV Ext num: 817
+AV counting num: 931
+AV Loc num: 581
+AV Cmp num: 717
+AV Temporal num: 532
+INFO:root:Audio Counting Accuracy: 83.19 %
+INFO:root:Audio Cmp Accuracy: 70.88 %
+INFO:root:Audio Accuracy: 78.65 %
+INFO:root:Visual Counting Accuracy: 79.70 %
+INFO:root:Visual Loc Accuracy: 77.06 %
+INFO:root:Visual Accuracy: 78.36 %
+INFO:root:AV Ext Accuracy: 82.69 %
+INFO:root:AV counting Accuracy: 73.60 %
+INFO:root:AV Loc Accuracy: 63.15 %
+INFO:root:AV Cmp Accuracy: 65.12 %
+INFO:root:AV Temporal Accuracy: 64.72 %
+INFO:root:AV Accuracy: 70.21 %
+INFO:root:Overall Accuracy: 73.86 %
+Audio Counting num: 846
+Audio Cmp num: 421
+Visual Counting num: 954
+Visual Loc num: 944
+AV Ext num: 817
+AV counting num: 931
+AV Loc num: 581
+AV Cmp num: 717
+AV Temporal num: 532
+Audio Counting num: 846
+Audio Cmp num: 421
+Visual Counting num: 954
+Visual Loc num: 944
+AV Ext num: 817
+AV counting num: 931
+AV Loc num: 581
+AV Cmp num: 717
+AV Temporal num: 532

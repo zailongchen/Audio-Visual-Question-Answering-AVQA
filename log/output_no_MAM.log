@@ -1,0 +1,167 @@
+nohup: ignoring input
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/distributed/launch.py:178: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/scipy/__init__.py:146: UserWarning: A NumPy version >=1.16.5 and <1.23.0 is required for this version of SciPy (detected version 1.23.1
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+INFO:root:********************************************************
+INFO:root:****************** Experiment setting ******************
+INFO:root:label_train dir --------- ./data/json_update/avqa-train.json
+INFO:root:label_val dir ----------- ./data/json_update/avqa-val.json
+INFO:root:label_test dir ---------- ./data/json_update/avqa-test.json
+INFO:root:audio dir --------------- ./data/feats/vggish
+INFO:root:posi_video dir ---------- /data/avst/r2plus1d_18/
+INFO:root:nega_video dir ---------- /data/avst/r2plus1d_18/
+INFO:root:batch size -------------- 32
+INFO:root:num of epoches ---------- 15
+INFO:root:learning rate ----------- 0.0001
+INFO:root:name of model ----------- AVQA_Fusion_Net
+INFO:root:train or test ----------- train
+INFO:root:model save dir ---------- ./data/checkpoints/checkpoint_no_MAM
+INFO:root:num of dataloader workers 2
+INFO:root:gpu id ------------------ 2,3
+INFO:root:********************************************************
+INFO:torch.distributed.distributed_c10d:Added key: store_based_barrier_key:1 to store for rank: 0
+INFO:torch.distributed.distributed_c10d:Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+INFO:root:------------ Audio-Visual Spatial-Temporal Model ------------ 
+
+INFO:root:-------------- training dataset preparation --------------
+
+INFO:root:--------- training dataset preparation completed ----------
+
+INFO:root:length of training dataset ----------- 499
+
+INFO:root:-------------- validation dataset preparation --------------
+
+INFO:root:-------- validation dataset preparation completed ----------
+INFO:root:length of validation dataset ----------- 143
+INFO:root:-------------- start training --------------
+
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+/home/jovyan/conda-envs/czl/lib/python3.9/site-packages/torch/nn/functional.py:1949: UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
+  warnings.warn("nn.functional.tanh is deprecated. Use torch.tanh instead.")
+INFO:root:Train Epoch: 1 [0/31927 ]	Loss: 4.511269569396973
+INFO:root:Train Epoch: 1 [3200/31927 ]	Loss: 1.658627986907959
+INFO:root:Train Epoch: 1 [6400/31927 ]	Loss: 1.2991492748260498
+INFO:root:Train Epoch: 1 [9600/31927 ]	Loss: 1.4019322395324707
+INFO:root:Train Epoch: 1 [12800/31927 ]	Loss: 1.1330631971359253
+INFO:root:Accuracy qa: 62.23730297723292
+INFO:root:Train Epoch: 2 [0/31927 ]	Loss: 1.0940003395080566
+INFO:root:Train Epoch: 2 [3200/31927 ]	Loss: 1.2468464374542236
+INFO:root:Train Epoch: 2 [6400/31927 ]	Loss: 1.1904923915863037
+INFO:root:Train Epoch: 2 [9600/31927 ]	Loss: 1.0948803424835205
+INFO:root:Train Epoch: 2 [12800/31927 ]	Loss: 1.2101829051971436
+INFO:root:Accuracy qa: 64.25131348511384
+INFO:root:Train Epoch: 3 [0/31927 ]	Loss: 1.065267562866211
+INFO:root:Train Epoch: 3 [3200/31927 ]	Loss: 0.9831068515777588
+INFO:root:Train Epoch: 3 [6400/31927 ]	Loss: 1.1860054731369019
+INFO:root:Train Epoch: 3 [9600/31927 ]	Loss: 0.8914915323257446
+INFO:root:Train Epoch: 3 [12800/31927 ]	Loss: 1.060908317565918
+INFO:root:Accuracy qa: 68.10420315236428
+INFO:root:Train Epoch: 4 [0/31927 ]	Loss: 0.7964248061180115
+INFO:root:Train Epoch: 4 [3200/31927 ]	Loss: 0.8911604881286621
+INFO:root:Train Epoch: 4 [6400/31927 ]	Loss: 1.0143897533416748
+INFO:root:Train Epoch: 4 [9600/31927 ]	Loss: 0.9777989983558655
+INFO:root:Train Epoch: 4 [12800/31927 ]	Loss: 0.7709342241287231
+INFO:root:Accuracy qa: 68.91418563922942
+INFO:root:Train Epoch: 5 [0/31927 ]	Loss: 0.7437918186187744
+INFO:root:Train Epoch: 5 [3200/31927 ]	Loss: 0.8165943026542664
+INFO:root:Train Epoch: 5 [6400/31927 ]	Loss: 0.6388102769851685
+INFO:root:Train Epoch: 5 [9600/31927 ]	Loss: 0.7438715696334839
+INFO:root:Train Epoch: 5 [12800/31927 ]	Loss: 0.9088573455810547
+INFO:root:Accuracy qa: 70.81873905429072
+INFO:root:Train Epoch: 6 [0/31927 ]	Loss: 0.9426298141479492
+INFO:root:Train Epoch: 6 [3200/31927 ]	Loss: 0.537729024887085
+INFO:root:Train Epoch: 6 [6400/31927 ]	Loss: 0.6502891778945923
+INFO:root:Train Epoch: 6 [9600/31927 ]	Loss: 1.0134724378585815
+INFO:root:Train Epoch: 6 [12800/31927 ]	Loss: 0.7732101678848267
+INFO:root:Accuracy qa: 71.47548161120841
+INFO:root:Train Epoch: 7 [0/31927 ]	Loss: 0.8676230907440186
+INFO:root:Train Epoch: 7 [3200/31927 ]	Loss: 0.6181926131248474
+INFO:root:Train Epoch: 7 [6400/31927 ]	Loss: 0.8081210851669312
+INFO:root:Train Epoch: 7 [9600/31927 ]	Loss: 0.6415046453475952
+INFO:root:Train Epoch: 7 [12800/31927 ]	Loss: 0.6086852550506592
+INFO:root:Accuracy qa: 71.19089316987741
+INFO:root:Train Epoch: 8 [0/31927 ]	Loss: 0.4927484393119812
+INFO:root:Train Epoch: 8 [3200/31927 ]	Loss: 0.7049974203109741
+INFO:root:Train Epoch: 8 [6400/31927 ]	Loss: 0.6358418464660645
+INFO:root:Train Epoch: 8 [9600/31927 ]	Loss: 0.5062971711158752
+INFO:root:Train Epoch: 8 [12800/31927 ]	Loss: 0.48158538341522217
+INFO:root:Accuracy qa: 72.43870402802102
+INFO:root:Train Epoch: 9 [0/31927 ]	Loss: 0.58627849817276
+INFO:root:Train Epoch: 9 [3200/31927 ]	Loss: 0.4295995533466339
+INFO:root:Train Epoch: 9 [6400/31927 ]	Loss: 0.393595427274704
+INFO:root:Train Epoch: 9 [9600/31927 ]	Loss: 0.413224458694458
+INFO:root:Train Epoch: 9 [12800/31927 ]	Loss: 0.5747241377830505
+INFO:root:Accuracy qa: 74.32136602451838
+INFO:root:Train Epoch: 10 [0/31927 ]	Loss: 0.313093364238739
+INFO:root:Train Epoch: 10 [3200/31927 ]	Loss: 0.3348221182823181
+INFO:root:Train Epoch: 10 [6400/31927 ]	Loss: 0.3743244409561157
+INFO:root:Train Epoch: 10 [9600/31927 ]	Loss: 0.3281022608280182
+INFO:root:Train Epoch: 10 [12800/31927 ]	Loss: 0.3157438039779663
+INFO:root:Accuracy qa: 74.32136602451838
+INFO:root:Train Epoch: 11 [0/31927 ]	Loss: 0.33130961656570435
+INFO:root:Train Epoch: 11 [3200/31927 ]	Loss: 0.31723254919052124
+INFO:root:Train Epoch: 11 [6400/31927 ]	Loss: 0.25399771332740784
+INFO:root:Train Epoch: 11 [9600/31927 ]	Loss: 0.3378528952598572
+INFO:root:Train Epoch: 11 [12800/31927 ]	Loss: 0.2948281764984131
+INFO:root:Accuracy qa: 74.19001751313485
+INFO:root:Train Epoch: 12 [0/31927 ]	Loss: 0.2467537820339203
+INFO:root:Train Epoch: 12 [3200/31927 ]	Loss: 0.22850170731544495
+INFO:root:Train Epoch: 12 [6400/31927 ]	Loss: 0.29900065064430237
+INFO:root:Train Epoch: 12 [9600/31927 ]	Loss: 0.26270413398742676
+INFO:root:Train Epoch: 12 [12800/31927 ]	Loss: 0.3343827724456787
+INFO:root:Accuracy qa: 73.577057793345
+INFO:root:Train Epoch: 13 [0/31927 ]	Loss: 0.19831781089305878
+INFO:root:Train Epoch: 13 [3200/31927 ]	Loss: 0.2238209843635559
+INFO:root:Train Epoch: 13 [6400/31927 ]	Loss: 0.23206186294555664
+INFO:root:Train Epoch: 13 [9600/31927 ]	Loss: 0.25455227494239807
+INFO:root:Train Epoch: 13 [12800/31927 ]	Loss: 0.2948153018951416
+INFO:root:Accuracy qa: 74.12434325744309
+INFO:root:Train Epoch: 14 [0/31927 ]	Loss: 0.2553623616695404
+INFO:root:Train Epoch: 14 [3200/31927 ]	Loss: 0.27093705534935
+INFO:root:Train Epoch: 14 [6400/31927 ]	Loss: 0.2908192276954651
+INFO:root:Train Epoch: 14 [9600/31927 ]	Loss: 0.34680724143981934
+INFO:root:Train Epoch: 14 [12800/31927 ]	Loss: 0.2228383719921112
+INFO:root:Accuracy qa: 73.73029772329247
+INFO:root:Train Epoch: 15 [0/31927 ]	Loss: 0.18670672178268433
+INFO:root:Train Epoch: 15 [3200/31927 ]	Loss: 0.2077648937702179
+INFO:root:Train Epoch: 15 [6400/31927 ]	Loss: 0.20748132467269897
+INFO:root:Train Epoch: 15 [9600/31927 ]	Loss: 0.1698523461818695
+INFO:root:Train Epoch: 15 [12800/31927 ]	Loss: 0.22711676359176636
+INFO:root:Accuracy qa: 74.08056042031524
+INFO:root:-------------- end of training --------------
+
+INFO:root:length of test dataset ----------- 9129
+INFO:root:-------------- loading checkpoint ----------------
+INFO:root:-------- checkpoint loading successfully ----------
+INFO:root:********************************************************
+INFO:root:the best epoch ---------- 9
+INFO:root:the best train acc ------ 74.32136602451838
+INFO:root:********************************************************
+INFO:root:Audio Counting Accuracy: 83.58 %
+INFO:root:Audio Cmp Accuracy: 69.70 %
+INFO:root:Audio Accuracy: 78.46 %
+INFO:root:Visual Counting Accuracy: 78.86 %
+INFO:root:Visual Loc Accuracy: 77.71 %
+INFO:root:Visual Accuracy: 78.28 %
+INFO:root:AV Ext Accuracy: 83.00 %
+INFO:root:AV counting Accuracy: 74.86 %
+INFO:root:AV Loc Accuracy: 64.02 %
+INFO:root:AV Cmp Accuracy: 62.22 %
+INFO:root:AV Temporal Accuracy: 65.45 %
+INFO:root:AV Accuracy: 70.23 %
+INFO:root:Overall Accuracy: 73.82 %
