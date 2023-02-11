@@ -13,6 +13,7 @@ The pretrained model of this paper can be downloaded at [Glo_Loc](https://pan.ba
 /models includes the backbone and other supporting modules we use
 /dataloader includes the dataloader for data prepocessing
 /data includes all required data and pretrained models to extract features
+/Install all required packages, for example, pip install info-nce-pytorch
 ```
 Our implement is based on [MUSIC-AVQA](https://pages.github.com/) and [MIMN](https://github.com/xunan0812/MIMN). Thanks them for their contribution!
 ## Preliminary optimization results
